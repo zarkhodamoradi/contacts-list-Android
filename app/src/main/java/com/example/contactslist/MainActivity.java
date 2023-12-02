@@ -25,6 +25,8 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,7 +85,14 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
             adapter.notifyDataSetChanged(); // Update the adapter with the new contacts
         }
-
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Ali");
+        Collections.sort(contacts, new Comparator<Contact>() {
+            @Override
+            public int compare(Contact o1, Contact o2) {
+                return (o1.getFullName().compareTo( o2.getFullName()));
+            }
+        });
 
         contactListView.setAdapter(adapter);
     }
